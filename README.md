@@ -1,6 +1,6 @@
 # sql-to-xorm-struct
 
-输入 sql文件，解析为struct
+将sql文件解析为xorm的结构体
 
 例：
 ``` sql
@@ -51,5 +51,11 @@ type Action struct{
 func (t *Action)TableName()string{
 	return "action"
 }
-
 ```
+
+遗留问题：
+1、SQL语法中的COMMENT在xorm中不支持，xorm开发者说是支持的，但是代码中也没见相关处理。
+2、转换后的文件未经格式化，有点乱。
+3、可能还有未支持的数据类型。
+4、struct的json tag用了表的列名，但表的列明格式不一定统一，是否要全部转换为下划线格式。
+5、暂未支持UNIQUE KEY、外键。
